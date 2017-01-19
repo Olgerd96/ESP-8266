@@ -1,3 +1,17 @@
+//#include <ESP8266WiFi.h>
+//#include <ESP8266WiFiAP.h>
+//#include <ESP8266WiFiGeneric.h>
+//#include <ESP8266WiFiMulti.h>
+//#include <ESP8266WiFiScan.h>
+//#include <ESP8266WiFiSTA.h>
+//#include <ESP8266WiFiType.h>
+//#include <WiFiClient.h>
+//#include <WiFiClientSecure.h>
+//#include <WiFiServer.h>
+//#include <WiFiUdp.h>
+
+int blinkdelay = 1;
+
 /*
  ESP8266 Blink by Simon Peter
  Blink the blue LED on the ESP-01 module
@@ -18,15 +32,26 @@ void loop() {
   digitalWrite(LED_BUILTIN, LOW);   // Turn the LED on (Note that LOW is the voltage level
                                     // but actually the LED is on; this is because 
                                     // it is acive low on the ESP-01)
-  delay(100);                      // Wait for a second
+  Serial.begin(115200);
+  
+  delay(blinkdelay);                      // Wait for a second
   digitalWrite(LED_BUILTIN, HIGH);  // Turn the LED off by making the voltage HIGH
   delay(150);
   digitalWrite(LED_BUILTIN, LOW);
-  delay(100);
+  delay(blinkdelay);
   digitalWrite(LED_BUILTIN, HIGH);
   delay(150);
   digitalWrite(LED_BUILTIN, LOW);
-  delay(100);
+  delay(blinkdelay);
   digitalWrite(LED_BUILTIN, HIGH);
+  //SerString = 
+  Serial.println("Blink " + String(blinkdelay) + " ms.");
+  // Вариант 1: увеличиваю время включеного состояния
+  //blinkdelay+=1;
+  //if (blinkdelay=99)  blinkdelay = 1; 
+  
+  // Вариант 2: случайне время включенного состояния
+  blinkdelay = random(10);
+  
   delay(2000);                      // Wait for two seconds (to demonstrate the active low LED)
 }
